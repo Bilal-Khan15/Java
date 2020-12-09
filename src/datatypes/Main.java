@@ -8,7 +8,7 @@ public class Main {
 
         Wrapper wrapper = new Wrapper();
         Long num6 = wrapper.getLong();
-        wrapper.num5 = num6 / 7.0;
+        wrapper.num5 = num6 / 7.0d;
 
         
         if(wrapper.flag){
