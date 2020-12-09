@@ -12,4 +12,8 @@ public class Staff extends User {
     protected void checkAccount() {
         System.out.println("Staff.java => checkAccount() called");
     }
+
+    public void getBookInfo(){
+        System.out.println("Staff.java => getBookInfo() called");
+    }
 }

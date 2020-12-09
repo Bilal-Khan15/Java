@@ -1,17 +1,23 @@
 package oop;
 
-public class User {
+//Abstract Class
+public abstract class User {
 //    Private access modifier
     private Integer id;
     private String name;
+    private IAccount usersAccount = new Account();
 
     public User(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    //    Public access modifier
-    public void verify(){
+    public void printFine(){
+        System.out.println(this.name + "'s fine = " + usersAccount.calculateFine());
+    }
+
+    //    Default access modifier
+    void verify(){
         System.out.println("User.java => verify() called");
     }
 
@@ -20,8 +26,10 @@ public class User {
         System.out.println("User.java => checkAccount() called");
     }
 
-//    Default access modifier
-    void getBookInfo(){
-        System.out.println("User.java => getBookInfo() called");
+//    Public access modifier
+    public abstract void getBookInfo();
+
+    public String getName() {
+        return name;
     }
 }

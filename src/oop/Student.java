@@ -13,4 +13,8 @@ public class Student extends User {
     public void verify(int id){
         System.out.println("Student.java => verify(int id) called");
     }
+
+    public void getBookInfo(){
+        System.out.println("Student.java => getBookInfo() called");
+    }
 }
