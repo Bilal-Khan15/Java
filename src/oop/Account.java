@@ -2,10 +2,10 @@ package oop;
 
 //Interface
 public class Account implements IAccount{
-    private int fine;
+    final int fine = 100;  // final
 
-    public Account() {
-        this.fine = 100;
+    public Account( ) {
+//        this.fine = 10;
     }
 
     public int calculateFine(){
