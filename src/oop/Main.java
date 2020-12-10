@@ -14,6 +14,9 @@ public class Main {
 
     public static void main(String[] args){
 
+        Student.count = 5;
+//        Student.grade = 5;
+
         ArrayList<Student> studentsArrayList = getStudents();  // For Loop
         LinkedList<Staff> staffLinkedList = getStaff();  // Do..While Loop
 
@@ -106,5 +109,11 @@ public class Main {
             System.out.println("2. 404");
         }
     }
-}
 
+    public static void temp(){
+//        throw new Exception();
+    }
+    public static void temp1(){
+        throw new RuntimeException();
+    }
+}

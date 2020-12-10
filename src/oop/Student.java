@@ -2,7 +2,8 @@ package oop;
 
 //Inheritance
 public class Student extends User {
-    private Integer grade;
+    public Integer grade;
+    public static Integer count;
 
     public Student(Integer id, String name, Integer grade) {
         super(id, name);
