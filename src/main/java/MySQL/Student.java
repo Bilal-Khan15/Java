@@ -8,6 +8,10 @@ public class Student {
     private String fatherName;
     private boolean setId;
 
+    public Student(){
+
+    }
+
     public Student(String rollNo, String name, String fatherName) {
         this.rollNo = rollNo;
         this.name = name;
