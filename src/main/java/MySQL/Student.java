@@ -6,7 +6,6 @@ public class Student {
     private String rollNo;
     private String name;
     private String fatherName;
-    private boolean setId;
 
     public Student(){
 
@@ -16,16 +15,17 @@ public class Student {
         this.rollNo = rollNo;
         this.name = name;
         this.fatherName = fatherName;
-        this.setId = false;
     }
 
-    public boolean hasId(){
-        return setId;
+    public Student(int id, String rollNo, String name, String fatherName) {
+        this.id = id;
+        this.rollNo = rollNo;
+        this.name = name;
+        this.fatherName = fatherName;
     }
 
     public void setId(int id) {
         this.id = id;
-        this.setId = true;
     }
 
     public void setRollNo(String rollNo) {
@@ -41,10 +41,7 @@ public class Student {
     }
 
     public int getId() {
-        if(setId)
-            return id;
-        else
-            return -1;
+        return id;
     }
 
     public String getRollNo() {

@@ -1,70 +1,13 @@
 package MySQL;
 
-import javax.print.attribute.standard.Media;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-@Path("/hello-world")
-public class Main {
+public class StudentService {
 
     static Connection conn = DBConnection.getConnect();
-
-    @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String add(@FormParam("rollNo") String rollNo,
-                      @FormParam("name") String name,
-                      @FormParam("fatherName") String fatherName,
-                      @Context HttpServletResponse servletResponse) throws IOException {
-        Student student = new Student(rollNo, name, fatherName);
-        addStudent(student);
-        readStudent(student.getId());
-
-        return ("{\"result\" : \"Added, " + name + "\"}");
-    }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String update(@FormParam("id") int id,
-                         @FormParam("rollNo") String rollNo,
-                         @FormParam("name") String name,
-                         @FormParam("fatherName") String fatherName,
-                         @Context HttpServletResponse servletResponse) throws IOException {
-        Student student = new Student(rollNo, name, fatherName);
-        student.setId(id);
-        updateStudent(student);
-        readStudent(student.getId());
-
-        return ("{\"result\" : \"Updated, " + name + "\"}");
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public String add(@PathParam("id") int id,
-                      @Context HttpServletResponse servletResponse) throws IOException, SQLException {
-
-        ResultSet result = readStudent(id);
-
-        return ("{\"result\" : \"" + result.getString("name") + " s / o " +
-                result.getString("fatherName") + " having Roll No. " +
-                result.getString("rollNo") + " read successfully!" + "\"}");
-    }
-
-    @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public String remove(@PathParam("id") int id,
-                         @Context HttpServletResponse servletResponse) throws IOException {
-        removeStudent(id);
-
-        return ("{\"result\" : \"Deleted, id = " + id + "\"}");
-    }
 
     public static void addStudent(Student student){
 
@@ -122,7 +65,7 @@ public class Main {
         }
     }
 
-    public static ResultSet readStudent(int id){
+    public static Student readStudent(int id){
 
         String sql = "SELECT * FROM students WHERE id=?";
         ResultSet result;
@@ -136,7 +79,12 @@ public class Main {
                 System.out.println(result.getString("name") + " s/o " +
                         result.getString("fatherName") + " having Roll No. " +
                         result.getString("rollNo") + " read successfully!");
-                return result;
+
+                Student student = new Student(result.getInt("id"),
+                        result.getString("rollNo"),
+                        result.getString("name"),
+                        result.getString("fatherName"));
+                return student;
             } else{
                 System.out.println("Read Failed");
             }
@@ -163,4 +111,5 @@ public class Main {
             System.out.println(e);
         }
     }
+
 }
